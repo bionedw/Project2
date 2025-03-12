@@ -1,6 +1,7 @@
 package com.javaweb.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,17 +20,15 @@ import customException.FieldRequiredException;
 
 @RestController
 public class BuildingAPI {
-	
+
 	@Autowired
 	private BuildingService buildingService;
 	
 	@GetMapping(value = "api/building/") // new
 	// @RequestMapping(value="/api/building", method= RequestMethod.GET)
 	// @ResponseBody //tra ve theo cau truc JSON (co the dung Map hoac Beans)
-	public List<BuildingDTO> getBuilding(@RequestParam(value="name", required=false) String name,
-										@RequestParam(value="districtid", required=false) Long districtid,
-										@RequestParam(value="typecode", required=false) List<String> typecode) {
-		List<BuildingDTO> result=buildingService.findAll(name, districtid);
+	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> params) {
+		List<BuildingDTO> result=buildingService.findAll(params);
 		return result;
 	}
 
