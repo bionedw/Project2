@@ -2,6 +2,7 @@ package com.javaweb.api;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,8 +28,9 @@ public class BuildingAPI {
 	@GetMapping(value = "api/building/") // new
 	// @RequestMapping(value="/api/building", method= RequestMethod.GET)
 	// @ResponseBody //tra ve theo cau truc JSON (co the dung Map hoac Beans)
-	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> params) {
-		List<BuildingDTO> result=buildingService.findAll(params);
+	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> params,
+										 @RequestParam (name="typeCode", required = false) List<String> typeCode) {
+		List<BuildingDTO> result=buildingService.findAll(params, typeCode);
 		return result;
 	}
 
