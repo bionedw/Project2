@@ -1,13 +1,9 @@
 package com.javaweb.api;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.javaweb.converter.BuildingDTOConverter;
-import com.javaweb.repository.BuildingRepository;
-import com.javaweb.repository.entity.BuildingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,22 +24,13 @@ public class BuildingAPI {
 
 	@Autowired
 	private BuildingService buildingService;
-	@Autowired
-	private BuildingRepository buildingRepository;
-	@Autowired
-	private BuildingDTOConverter buildingDTOConverter;
-	
+
 	@GetMapping(value = "api/building/") // new
 	// @RequestMapping(value="/api/building", method= RequestMethod.GET)
 	// @ResponseBody //tra ve theo cau truc JSON (co the dung Map hoac Beans)
 	public List<BuildingDTO> getBuilding(@RequestParam Map<String, Object> params,
 										 @RequestParam (name="typeCode", required = false) List<String> typeCode) {
-        List<BuildingEntity> buildingEntities=buildingRepository.findAll(params, typeCode);
-		List<BuildingDTO> result=new ArrayList<>();
-		for(BuildingEntity item:buildingEntities) {
-			BuildingDTO buildingDTO= buildingDTOConverter.toBuildingDTO(item);
-			result.add(buildingDTO);
-		}
+		List<BuildingDTO> result=buildingService.findAll(params, typeCode);
 		return result;
 	}
 
