@@ -8,14 +8,23 @@ public class BuildingDTO {
 	private String managerPhoneNumber;
 	private Integer rentPrice;
 	private String serviceFee;
-	private Integer floorArea;
+	private String rentArea;
+	private Float brokerageFee;
 
-	public Integer getFloorArea() {
-		return floorArea;
+	public Float getBrokerageFee() {
+		return brokerageFee;
 	}
 
-	public void setFloorArea(Integer floorArea) {
-		this.floorArea = floorArea;
+	public void setBrokerageFee(Float brokerageFee) {
+		this.brokerageFee = brokerageFee;
+	}
+
+	public String getRentArea() {
+		return rentArea;
+	}
+
+	public void setRentArea(String rentArea) {
+		this.rentArea = rentArea;
 	}
 
 	public String getServiceFee() {
